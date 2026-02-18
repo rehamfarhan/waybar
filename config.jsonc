@@ -7,47 +7,22 @@
     "gtk-layer-shell": true,
 	
     "include": [
-		// "~/.config/waybar/modules.jsonc",
-		"~/.config/waybar/modules/*.jsonc",
-		"~/.config/waybar/modules/custom/*.jsonc",
-		"~/.config/waybar/modules/extra/*.jsonc",
-		"~/.config/waybar/modules/hyprland/*.jsonc"
+		"./modules.jsonc"
 	],
 
     "modules-left": [
 		"clock",
 		"network", 
-		"bluetooth",
 		"hyprland/window"
 	],
     "modules-center": [
-		"custom/rofi",
 		"hyprland/workspaces",
-		"group/exit",
-		"custom/wol",
-		"custom/tailscale",
-		"custom/updates",
-		"custom/github"
+		"custom/media"
 	],
     "modules-right": [
-		"custom/media",
-		"group/hardware",
 		"group/audio",
-		"tray",
-		"custom/swaync"
+		"tray"
 	],
-
-	// Group Hardware
-	"group/hardware": {
-		"orientation": "horizontal",
-		"modules":[
-			"temperature",
-			"battery",
-			"power-profiles-daemon",
-			"custom/wl-gammarelay-temperature",
-			"backlight"
-		]
-	},
 
 	// Group IO Audio
 	"group/audio": {
@@ -55,15 +30,6 @@
 		"modules": [
 			"pulseaudio",
 			"pulseaudio#microphone"
-		]
-	},
-
-	// Group Exit
-	"group/exit": {
-		"orientation": "horizontal",
-		"modules": [
-			"custom/power_btn",
-			"custom/lock_screen"
 		]
 	}
 }

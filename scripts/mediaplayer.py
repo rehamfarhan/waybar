@@ -113,32 +113,38 @@ class PlayerManager:
         player_name = player.props.player_name
         artist = player.get_artist()
         title = player.get_title()
-        title = title.replace("&", "&amp;")
+        album = metadata.get("xesam:album", None)
+        
+        title = title.replace("&", "&amp;") if title else ""
+        artist = artist.replace("&", "&amp;") if artist else ""
+        album = album.replace("&", "&amp;") if album else ""
 
         track_info = ""
         if player_name == "spotify" and "mpris:trackid" in metadata.keys() and ":ad:" in player.props.metadata["mpris:trackid"]:
             track_info = "Advertisement"
-        elif artist is not None and title is not None:
+        elif artist and title:
             track_info = f"{artist} - {title}"
-        else:
+            if album:
+                track_info += f" ({album})"
+        elif title:
             track_info = title
 
-        # TODO Add Icons
         if track_info:
+            # Player icon
+            icon = ""
             if player_name == "spotify":
-                track_info = track_info + " "
-            elif "chromium" in player_name:
-                track_info = track_info + " "
-            if player.props.status == "Playing":
-                track_info = " " + track_info
-            elif player.props.status == "Paused":
-                track_info = " " + track_info
+                icon = ""
+            elif "chromium" in player_name or "firefox" in player_name:
+                icon = "" if "firefox" in player_name else ""
+            
+            # Status icon
+            status_icon = "" if player.props.status == "Playing" else ""
+            
+            track_info = f"{status_icon} {icon} {track_info}"
         
-        # ! if status it "Stopped", chromium still shows as playing even after closing tab. Open issue with chromium
         if player.props.status == "Stopped":
             track_info = ""
 
-        # only print output if no other player is playing 
         current_playing = self.get_first_playing_player()
         if current_playing is None or current_playing.props.player_name == player.props.player_name:
             self.write_output(track_info, player)
