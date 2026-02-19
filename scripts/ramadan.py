@@ -9,8 +9,6 @@ import sys
 
 def get_ramadan_info():
     today = datetime.date.today()
-    # Simple example data for the month of Ramadan (Feb/March 2026)
-    # In a real scenario, this would use a library like 'hijri-converter' or an API.
     
     # Placeholder: Sehri ~5:15 AM, Iftar ~6:15 PM
     sehri = datetime.time(5, 15)
@@ -39,8 +37,8 @@ def get_ramadan_info():
     
     time_str = f"{hours}h {minutes}m"
     text = f"{icon} {next_event} in {time_str}"
-    tooltip = f"Next: {next_event}
-Remaining: {time_str}"
+    # Use literal \n for multi-line tooltip
+    tooltip = f"Next: {next_event}\\nRemaining: {time_str}"
     
     return json.dumps({
         "text": text,

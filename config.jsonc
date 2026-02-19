@@ -1,30 +1,53 @@
 {
     "layer": "top",
-    "position": "top",
+    "position": "bottom",
     "mod": "dock",
     "exclusive": true,
     "passthrough": false,
     "gtk-layer-shell": true,
 	
     "include": [
-		"./modules.jsonc"
+      "/home/directpass/cool_dotfiles/waybar/modules.jsonc"
 	],
 
     "modules-left": [
+		"custom/user",
 		"clock",
 		"network", 
 		"hyprland/window"
 	],
     "modules-center": [
-		"hyprland/workspaces",
-		"custom/media"
+		"group/center"
 	],
     "modules-right": [
+		"custom/media",
+		"group/hardware",
 		"group/audio",
-		"tray"
+		"tray",
+		"custom/gamemode"
 	],
 
-	// Group IO Audio
+	// Group Center
+	"group/center": {
+		"orientation": "horizontal",
+		"modules": [
+			"custom/exams",
+			"custom/sleep",
+			"hyprland/workspaces",
+			"custom/ramadan"
+		]
+	},
+
+	// Group Hardware
+	"group/hardware": {
+		"orientation": "horizontal",
+		"modules": [
+			"cpu",
+			"memory"
+		]
+	},
+
+	// Group Audio
 	"group/audio": {
 		"orientation": "horizontal",
 		"modules": [

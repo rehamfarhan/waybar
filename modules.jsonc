@@ -18,6 +18,11 @@
             "(.*)Claude(.*)": "󰭹 Claude",
             "(.*)YouTube(.*)": " YouTube",
             "(.*)Google(.*)": " Google",
+            "(.*) - Obsidian": "󱓧 $1",
+            "(.*) - Telegram": " $1",
+            "(.*) - Slack": " $1",
+            "(.*) - Zoom": "󰘔 $1",
+            "(.*) - Signal": "󰈎 $1",
             "Ghostty": " $1",
             "class<com.mitchellh.ghostty>": " $1",
             "class<org.gnome.Terminal>": " $1",
@@ -36,6 +41,7 @@
         "format": "{name}{icon}{windows}",
         "format-icons": {
             "urgent": "  ",
+            "active": " ",
             "default": " ",
             "empty": ""
         },
@@ -50,9 +56,12 @@
             "(.*) - Thunar": " ",
             "class<discord>": " ",
             "class<WhatsApp>": " ",
-            "Steam": " ",
             "class<org.telegram.desktop>": " ",
-            "WhatsDesk": " ",
+            "class<slack>": " ",
+            "class<zoom>": "󰘔 ",
+            "class<signal>": "󰈎 ",
+            "class<obsidian>": "󱓧 ",
+            "WhatsApp": " ",
             "Ghostty": " ",
             "class<com.mitchellh.ghostty>": " ",
             "class<spotify>": " ",
@@ -63,12 +72,12 @@
             "title<.*Claude.*>": "󰭹 "
 	},
         "persistent-workspaces": {
-            "*": 10
+            // Keep empty to only show active/occupied workspaces
         }
     },
 
     "cpu": {
-        "interval": 1,
+        "interval": 2,
         "format": " {usage}%",
         "on-click": "ghostty -e btop",
         "on-scroll-up": "brightnessctl set 1%+",
@@ -76,7 +85,7 @@
     },
 
     "memory": {
-        "interval": 1,
+        "interval": 2,
         "format": " {percentage}%",
         "format-alt": " {used:0.1f}G",
         "tooltip-format": "RAM: {used:0.1f}G / {total:0.1f}G\nSwap: {swapUsed:0.1f}G / {swapTotal:0.1f}G",
@@ -88,9 +97,8 @@
     "clock": {
         "interval": 1,
         "format": "{:%H:%M:%S}",
-        "locale": "it_IT.UTF-8",
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:L%a %d/%m/%y (%H:%M:%S)}",
+        "format-alt": "{:%a %d/%m/%y (%H:%M:%S)}",
         "calendar": {
                     "mode"          : "month",
                     "mode-mon-col"  : 3,
@@ -152,37 +160,49 @@
     },
 
     "custom/exams": {
-        "exec": "python3 ~/.config/waybar/scripts/exams.py",
+        "exec": "python3 /home/directpass/cool_dotfiles/waybar/scripts/exams.py",
         "return-type": "json",
         "interval": 3600,
         "tooltip": true
     },
 
     "custom/ramadan": {
-        "exec": "python3 ~/.config/waybar/scripts/ramadan.py",
+        "exec": "python3 /home/directpass/cool_dotfiles/waybar/scripts/ramadan.py",
         "return-type": "json",
         "interval": 60,
         "tooltip": true
     },
 
     "custom/sleep": {
-        "exec": "python3 ~/.config/waybar/scripts/sleep_warning.py",
+        "exec": "python3 /home/directpass/cool_dotfiles/waybar/scripts/sleep_warning.py",
         "return-type": "json",
-        "interval": 60,
+        "interval": 1800,
         "tooltip": true
     },
 
     "custom/gamemode": {
         "format": "󰓓 ",
-        "on-click": "sh ~/.config/waybar/scripts/gamemode.sh",
+        "on-click": "sh /home/directpass/cool_dotfiles/waybar/scripts/gamemode.sh",
         "tooltip": true,
         "tooltip-format": "Toggle Gamemode (Performance)"
     },
 
     "custom/user": {
-        "exec": "whoami",
-        "format": " {}",
-        "tooltip-format": "Kernel: $(uname -r)\nUptime: $(uptime -p)",
-        "interval": 3600
+        "exec": "sh /home/directpass/cool_dotfiles/waybar/scripts/user.sh",
+        "return-type": "json",
+        "interval": 1800,
+        "tooltip": true
+    },
+
+    "custom/media": {
+        "format": "{}",
+        "return-type": "json",
+        "max-length": 60,
+        "exec": "python3 /home/directpass/cool_dotfiles/waybar/scripts/mediaplayer.py",
+        "on-click": "playerctl play-pause",
+        "on-click-right": "playerctl stop",
+        "on-scroll-up": "playerctl next",
+        "on-scroll-down": "playerctl previous",
+        "tooltip": true
     }
 }

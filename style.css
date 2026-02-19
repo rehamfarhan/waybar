@@ -1,19 +1,23 @@
+/* =============================================================================
+   UNIVERSAL STYLING
+   ========================================================================== */
+
 * {
     border: none;
     border-radius: 0;
-    font-family: "JetBrainsMono Nerd Font", "Fira Code",  FontAwesome;
+    font-family: "JetBrainsMono Nerd Font", "Fira Code", FontAwesome;
     font-weight: bold;
     font-size: 14px;
     min-height: 0;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 window#waybar {
-    background-color: rgba(0, 0, 0, 0);
-    border-bottom: 0.5px solid @color7;
-    background: rgba(21, 18, 27, 0.6);
+    background-color: rgba(15, 15, 15, 0.4); 
     color: @foreground;
-    transition-property: background-color;
-    transition-duration: .5s;
+    margin: 8px 12px 0 12px;
+    border-radius: 16px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 window#waybar.hidden {
@@ -21,129 +25,143 @@ window#waybar.hidden {
 }
 
 tooltip {
-    background: @background;
+    background: rgba(10, 10, 10, 0.95);
     border-radius: 12px;
-    border-width: 2px;
-    border-style: solid;
-    border-color: @color2;
+    border: 1px solid @color2;
+    padding: 10px;
 }
 
+/* =============================================================================
+   WORKSPACES (Occupied ones only)
+   ========================================================================== */
 
 #workspaces {
-    background: rgba(8, 7, 10, 0.6);
-    margin: 5px;
-    padding: 2px 5px;
+    background: rgba(0, 0, 0, 0.6);
+    margin: 6px 4px;
+    padding: 0 5px;
     border-radius: 12px;
-    border: 0.5px solid @color2;
+    border: 1px solid @color7; /* High contrast border */
 }
 
 #workspaces button {
-    padding: 0px 5px;
+    padding: 0 8px;
     margin: 4px 3px;
-    border-radius: 8px;
+    border-radius: 10px;
     color: @foreground;
-    background-color: @color0;
-    transition: all 0.3s ease-in-out;
+    background-color: transparent;
 }
 
-
-#workspaces button.empty {
-    opacity: 0.4;
-}
 
 #workspaces button.active {
     color: @background;
-    background-color: @color7;
-    border-radius: 8px;
-    min-width: 40px;
-    transition: all 0.3s ease-in-out;
+    background: linear-gradient(135deg, @color7 0%, @color10 100%);
+    min-width: 45px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 #workspaces button.urgent {
     background-color: @color1;
     color: @background;
+    animation: flash 1s infinite alternate;
 }
 
-#workspaces button:hover {
-    background-color: @color7;
-    color: @background;
-}
+/* =============================================================================
+   COLORED PILLS
+   ========================================================================== */
 
-#clock,
-#network,
-#window,
-#custom-media,
-#pulseaudio,
-#tray,
-#cpu,
-#memory,
-#custom-exams,
-#custom-ramadan,
-#custom-sleep,
-#custom-gamemode,
-#custom-user {
-    background-color: @color0;
-    margin: 5px 2px;
-    padding: 0px 10px;
+#custom-user, #clock, #network, #window, 
+#custom-exams, #custom-sleep, #custom-ramadan,
+#cpu, #memory, #custom-media, 
+#pulseaudio, #pulseaudio.microphone, 
+#tray, #custom-gamemode {
+    background-color: rgba(5, 5, 5, 0.85);
+    padding: 0 12px;
+    margin: 8px 4px;
     border-radius: 12px;
-    border: 0.5px solid @color8;
 }
 
-#custom-user {
-    color: @color2;
-}
+/* --- LEFT --- */
+#custom-user { border: 1px solid @color2; color: @color2; }
+#clock { border: 1px solid @color3; color: @color3; }
+#network { border: 1px solid @color10; color: @color10; }
+#window { background: transparent; color: @foreground; border: none; }
 
+/* --- CENTER (Joined status pill) --- */
 #custom-exams {
+    border-radius: 12px 0 0 12px;
+    border: 1px solid @color3;
+    border-right: none;
     color: @color3;
+    margin: 8px 0; /* Vertical margin only */
 }
-#custom-exams.warning { color: @color11; }
-#custom-exams.critical { color: @color1; }
-
-#custom-ramadan {
-    color: @color14;
-}
-
 #custom-sleep {
+    border-radius: 0;
+    border: 1px solid @color13;
+    border-left: none;
+    border-right: none;
+    margin: 8px 0;
     color: @color13;
 }
-#custom-sleep.warning { color: @color11; }
-#custom-sleep.critical { color: @color1; }
-
-#custom-gamemode {
-    color: @color5;
+#workspaces {
+    background: rgba(5, 5, 5, 0.85);
+    border-radius: 0;
+    border: 1px solid @color7;
+    border-left: none;
+    border-right: none;
+    margin: 8px 0;
+    padding: 0 5px;
 }
+#custom-ramadan {
+    border-radius: 0 12px 12px 0;
+    border: 1px solid @color14;
+    border-left: none;
+    color: @color14;
+    margin: 8px 0;
+}
+
+/* --- RIGHT --- */
+#custom-media { border: 1px solid @color5; color: @color5; }
 
 #cpu {
+    border-radius: 12px 0 0 12px;
+    border: 1px solid @color4;
+    border-right: none;
     color: @color4;
+    margin-right: 0;
 }
-
 #memory {
+    border-radius: 0 12px 12px 0;
+    border: 1px solid @color6;
+    border-left: none;
     color: @color6;
-}
-
-#clock {
-    color: @color3;
-}
-
-#network {
-    color: @color10;
+    margin-left: 0;
 }
 
 #pulseaudio {
+    border-radius: 12px 0 0 12px;
+    border: 1px solid @color12;
+    border-right: none;
     color: @color12;
+    margin-right: 0;
 }
-
 #pulseaudio.microphone {
+    border-radius: 0 12px 12px 0;
+    border: 1px solid @color14;
+    border-left: none;
     color: @color14;
+    margin-left: 0;
 }
 
-#window {
-    background: @color7;
-    color: @background;
-    margin: 5px 10px;
+#tray { border: 1px solid @color7; }
+#custom-gamemode { border: 1px solid @color5; color: @color5; }
+#custom-gamemode.enabled { border-color: @color1; color: @color1; text-shadow: 0 0 5px @color1; }
+
+@keyframes flash {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
 }
 
-#tray {
-    padding: 0 10px;
+#custom-exams.critical, #custom-sleep.critical {
+    animation: flash 2s infinite;
 }
-
