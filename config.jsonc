@@ -5,6 +5,7 @@
     "exclusive": true,
     "passthrough": false,
     "gtk-layer-shell": true,
+    "height": 20,
 	
     "include": [
       "~/.config/waybar/modules.jsonc"
@@ -19,6 +20,7 @@
 		"group/center"
 	],
     "modules-right": [
+		"custom/exams",
 		"custom/media",
 		"group/hardware",
 		"group/audio",
@@ -30,7 +32,6 @@
 	"group/center": {
 		"orientation": "horizontal",
 		"modules": [
-			"custom/exams",
 			"custom/sleep",
 			"hyprland/workspaces",
 		"hyprland/window"
@@ -50,8 +51,7 @@
 	"group/audio": {
 		"orientation": "horizontal",
 		"modules": [
-			"pulseaudio",
-			"pulseaudio#microphone"
+			"pulseaudio"
 		]
 	}
 }

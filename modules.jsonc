@@ -26,6 +26,8 @@
             "default": " ",
             "empty": ""
         },
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+        "on-scroll-down": "hyprctl dispatch workspace e-1",
         "window-rewrite": {
             "title<.*youtube.*>": " ", 
             "(.*) - Chromium": " ",
@@ -78,7 +80,7 @@
 
     "clock": {
         "interval": 1,
-        "format": "󰥔 {:%H:%M:%S}", // Includes seconds and a clock icon
+        "format": "󰥔 {:%I:%M %p}", // Includes seconds and a clock icon
         "format-alt": "󰃭 {:%A, %B %d, %Y (%R)}", // Detailed date view
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
         "calendar": {
