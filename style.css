@@ -1,3 +1,8 @@
+@import "../../.cache/wal/colors-waybar.css";
+/* =============================================================================
+   THEME IMPORT (Omarchy Aether)
+   ========================================================================== */
+
 /* =============================================================================
    UNIVERSAL STYLING
    ========================================================================== */
@@ -7,34 +12,30 @@
     border-radius: 0;
     font-family: "JetBrainsMono Nerd Font", "Fira Code", FontAwesome;
     font-weight: bold;
-    font-size: 10px;
+    font-size: 11px;
     min-height: 0;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); /* Snappy but smooth */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 window#waybar {
     background-color: transparent; 
     color: @foreground;
-    margin: 8px 12px;
 }
 
-window#waybar.hidden {
-    opacity: 0.2;
-}
-
+/* Tooltip: Glassmorphism */
 tooltip {
-    background: rgba(15, 15, 15, 0.95);
+    background: rgba(15, 15, 15, 0.9);
     border-radius: 12px;
     border: 1px solid @color7;
     padding: 10px;
 }
 
 /* =============================================================================
-   WORKSPACES (The "Stretching" Style)
+   WORKSPACES (Aether Style)
    ========================================================================== */
 
 #workspaces {
-    background: rgba(25, 25, 35, 0.85); /* Dark pill container */
+    background: rgba(25, 25, 35, 0.7);
     margin: 6px 4px;
     padding: 2px 4px;
     border-radius: 20px;
@@ -47,34 +48,20 @@ tooltip {
     border-radius: 15px;
     color: @color7;
     background-color: rgba(255, 255, 255, 0.05);
-    min-width: 20px;
 }
 
 #workspaces button.active {
     color: @background;
-    background: @color7; /* Light stretching pill */
-    min-width: 60px; /* The "Stretch" effect */
+    background: linear-gradient(45deg, @color7, @color15); 
+    min-width: 50px; /* The Aether Stretch */
     border-radius: 15px;
 }
 
-#workspaces button.urgent {
-    background-color: @color1;
-    color: @background;
-}
-
-#workspaces button.empty {
-    padding: 0;
-    margin: 0;
-    min-width: 0;
-    background: transparent;
-    color: transparent;
-}
-
 /* =============================================================================
-   MODULE PILLS (Vibrant & Rounded)
+   MODULE PILLS
    ========================================================================== */
 
-#custom-user, #clock, #network, #window, #workspaces,
+#custom-user, #clock, #network, #window,
 #custom-exams, #custom-sleep, #custom-ramadan,
 #cpu, #memory, #custom-media, 
 #pulseaudio, #pulseaudio.microphone, 
@@ -85,37 +72,45 @@ tooltip {
     border-radius: 20px;
 }
 
-/* --- THE LIGHT PILL (Window Title) --- */
+/* --- THE JOINED PILLS --- */
+#custom-exams { border-radius: 20px 0 0 20px; margin-right: 0; }
+#custom-sleep { border-radius: 0; margin-left: 0; margin-right: 0; }
+#custom-ramadan { border-radius: 0 20px 20px 0; margin-left: 0; }
+
+/* --- DYNAMIC RAMADAN COLORS --- */
+#custom-ramadan.sehri {
+    color: @color4; /* Blueish */
+    text-shadow: 0 0 8px @color4;
+}
+
+#custom-ramadan.iftar {
+    color: @color3; /* Orangish */
+    text-shadow: 0 0 12px @color3;
+    animation: pulse_iftar 3s infinite;
+}
+
+/* --- CLOCK --- */
+#clock { 
+    color: @color5; 
+    border-bottom: 2px solid @color5;
+}
+
+/* --- HARDWARE --- */
+#cpu { color: @color4; border-radius: 20px 0 0 20px; margin-right: 0; }
+#memory { color: @color6; border-radius: 0 20px 20px 0; margin-left: 0; }
+
+/* --- WINDOW TITLE --- */
 #window {
     background: @color7;
     color: @background;
     padding: 0 20px;
-    margin: 6px 10px;
 }
 
-/* --- THE JOINED PILLS --- */
-
-/* Center Status Group */
-#custom-exams { border-radius: 20px 0 0 20px; margin-right: 0; padding-right: 8px; }
-#custom-sleep { border-radius: 0; margin-left: 0; margin-right: 0; padding: 0 8px; }
-#custom-ramadan { border-radius: 0 20px 20px 0; margin-left: 0; padding-left: 8px; }
-
-/* Hardware Group */
-#cpu { border-radius: 20px 0 0 20px; margin-right: 0; padding-right: 8px; }
-#memory { border-radius: 0 20px 20px 0; margin-left: 0; padding-left: 8px; }
-
-/* Audio Group */
-#pulseaudio { border-radius: 20px 0 0 20px; margin-right: 0; padding-right: 8px; }
-#pulseaudio.microphone { border-radius: 0 20px 20px 0; margin-left: 0; padding-left: 8px; }
-
-/* --- COLORS --- */
-#clock { color: @color3; }
-#network { color: @color4; }
-#custom-user { color: @color2; }
-#custom-media { color: @color5; }
-#cpu { color: @color4; }
-#memory { color: @color6; }
-#pulseaudio { color: @color12; }
-#pulseaudio.microphone { color: @color14; }
-#custom-gamemode { color: @color1; }
-
+/* =============================================================================
+   ANIMATIONS
+   ========================================================================== */
+@keyframes pulse_iftar {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
