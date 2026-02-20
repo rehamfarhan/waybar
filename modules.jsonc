@@ -148,23 +148,23 @@
     },
 
     "custom/exams": {
-        "exec": "python3 /home/directpass/cool_dotfiles/waybar/scripts/exams.py",
+        "exec": "python3 ~/.config/waybar/scripts/exams.py",
         "return-type": "json",
         "interval": 3600,
         "tooltip": true
     },
 
     "custom/ramadan": {
-        "exec": "python3 /home/directpass/cool_dotfiles/waybar/scripts/ramadan.py",
+        "exec": "python3 ~/.config/waybar/scripts/ramadan.py",
         "return-type": "json",
         "interval": 60,
         "tooltip": true,
         "format": "{}", 
-        "on-click": "notify-send 'Ramadan Schedule' '$(python3 /home/directpass/cool_dotfiles/waybar/scripts/ramadan.py | jq -r .tooltip)'"
+        "on-click": "notify-send 'Ramadan Schedule' '$(python3 ~/.config/waybar/scripts/ramadan.py | jq -r .tooltip)'"
     },
 
     "custom/sleep": {
-        "exec": "python3 /home/directpass/cool_dotfiles/waybar/scripts/sleep_warning.py",
+        "exec": "python3 ~/.config/waybar/scripts/sleep_warning.py",
         "return-type": "json",
         "interval": 1800,
         "tooltip": true
@@ -172,13 +172,13 @@
 
     "custom/gamemode": {
         "format": "󰓓 ",
-        "on-click": "sh /home/directpass/cool_dotfiles/waybar/scripts/gamemode.sh",
+        "on-click": "sh ~/.config/waybar/scripts/gamemode.sh",
         "tooltip": true,
         "tooltip-format": "Toggle Gamemode (Performance)"
     },
 
     "custom/user": {
-        "exec": "sh /home/directpass/cool_dotfiles/waybar/scripts/user.sh",
+        "exec": "sh ~/.config/waybar/scripts/user.sh",
         "return-type": "json",
         "interval": 1800,
         "tooltip": true
@@ -188,7 +188,7 @@
         "format": "{}",
         "return-type": "json",
         "max-length": 60,
-        "exec": "python3 /home/directpass/cool_dotfiles/waybar/scripts/mediaplayer.py",
+        "exec": "python3 ~/.config/waybar/scripts/mediaplayer.py",
         "on-click": "playerctl play-pause",
         "on-click-right": "playerctl stop",
         "on-scroll-up": "playerctl next",

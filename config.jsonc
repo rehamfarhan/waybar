@@ -7,14 +7,13 @@
     "gtk-layer-shell": true,
 	
     "include": [
-      "/home/directpass/cool_dotfiles/waybar/modules.jsonc"
+      "~/.config/waybar/modules.jsonc"
 	],
 
     "modules-left": [
-		"custom/user",
 		"clock",
 		"network", 
-		"hyprland/window"
+		"custom/ramadan"
 	],
     "modules-center": [
 		"group/center"
@@ -34,7 +33,7 @@
 			"custom/exams",
 			"custom/sleep",
 			"hyprland/workspaces",
-			"custom/ramadan"
+		"hyprland/window"
 		]
 	},
 

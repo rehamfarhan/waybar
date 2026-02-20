@@ -61,7 +61,7 @@ tooltip {
    MODULE PILLS
    ========================================================================== */
 
-#custom-user, #clock, #network, #window,
+#custom-user, #clock, #network, #window, #custom-ramadan,
 #custom-exams, #custom-sleep, #custom-ramadan,
 #cpu, #memory, #custom-media, 
 #pulseaudio, #pulseaudio.microphone, 
@@ -75,7 +75,6 @@ tooltip {
 /* --- THE JOINED PILLS --- */
 #custom-exams { border-radius: 20px 0 0 20px; margin-right: 0; }
 #custom-sleep { border-radius: 0; margin-left: 0; margin-right: 0; }
-#custom-ramadan { border-radius: 0 20px 20px 0; margin-left: 0; }
 
 /* --- DYNAMIC RAMADAN COLORS --- */
 #custom-ramadan.sehri {
@@ -99,13 +98,29 @@ tooltip {
 #cpu { color: @color4; border-radius: 20px 0 0 20px; margin-right: 0; }
 #memory { color: @color6; border-radius: 0 20px 20px 0; margin-left: 0; }
 
-/* --- WINDOW TITLE --- */
+/* 1. The Container */
 #window {
     background: @color7;
     color: @background;
     padding: 0 20px;
+    border-radius: 10px; /* Optional: makes it look modern */
 }
 
+/* 2. The Text Label (The part that actually changes) */
+#window label {
+    /* This forces the 'fadeIn' animation every time the label is updated/rendered */
+    animation: fadeIn 0.5s cubic-bezier(0.1, 0.7, 0.1, 1);
+}
+
+/* 3. The Animation Definition */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
 /* =============================================================================
    ANIMATIONS
    ========================================================================== */
