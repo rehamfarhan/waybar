@@ -1,33 +1,16 @@
 {
     "hyprland/window": {
-        "format": "{}",
+        "format": "{title}",
+        "max-length": 25,
         "rewrite": {
+            "": "Omarchy",
             "(.*) — Mozilla Firefox": " $1",
-            "(.*) - Google Chrome": " $1",
-            "(.*) - Brave": " $1",
-            "(.*) - Chromium": " $1",
-            "(.*) - VSCodium": "󰨞 $1",
+            "(.*) - Visual Studio Code": "󰨞 $1",
             "(.*) - Thunar": " $1",
             "(.*) - Discord": " $1",
-            "Steam": " Steam",
-            "WhatsDesk": " WhatsDesk",
-            "(.*)WhatsApp(.*)": " WhatsApp",
-            "(.*)Gemini(.*)": "󰭹 Gemini",
-            "(.*)Grok(.*)": "󱚣 Grok",
-            "(.*)ChatGPT(.*)": "󰭹 ChatGPT",
-            "(.*)Claude(.*)": "󰭹 Claude",
-            "(.*)YouTube(.*)": " YouTube",
-            "(.*)Google(.*)": " Google",
-            "(.*) - Obsidian": "󱓧 $1",
-            "(.*) - Telegram": " $1",
-            "(.*) - Slack": " $1",
-            "(.*) - Zoom": "󰘔 $1",
-            "(.*) - Signal": "󰈎 $1",
-            "Ghostty": " $1",
-            "class<com.mitchellh.ghostty>": " $1",
-            "class<org.gnome.Terminal>": " $1",
-            "class<org.telegram.desktop>": " $1",
-            "class<spotify>": " Spotify"
+            "(.*) - Spotify": " $1",
+            "(.*) - Kitty": " $1",
+            "(.*) - Ghostty": " $1"
         },
         "icon": false,
         "separate-output": true
@@ -35,12 +18,10 @@
 
     "hyprland/workspaces": {
         "disable-scroll": true,
-        "active-only": false,
         "all-outputs": true,
         "on-click": "activate",
-        "format": "{name}{icon}{windows}",
+        "format": "{name}",
         "format-icons": {
-            "urgent": "  ",
             "active": " ",
             "default": " ",
             "empty": ""
@@ -94,25 +75,32 @@
         "on-scroll-down": "brightnessctl set 1%-"
     },
 
+
     "clock": {
         "interval": 1,
-        "format": "{:%H:%M:%S}",
+        "format": "󰥔 {:%H:%M:%S}", // Includes seconds and a clock icon
+        "format-alt": "󰃭 {:%A, %B %d, %Y (%R)}", // Detailed date view
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%a %d/%m/%y (%H:%M:%S)}",
         "calendar": {
-                    "mode"          : "month",
-                    "mode-mon-col"  : 3,
-                    "weeks-pos"     : "right",
-                    "on-scroll"     : 1,
-                    "format": {
-                              "months":     "<span color='#ffead3'><b>{}</b></span>",
-                              "days":       "<span color='#ecc6d9'><b>{}</b></span>",
-                              "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
-                              "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
-                              "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
-                              }
-                    }
+           "mode": "month",
+           "mode-mon-col": 3,
+           "weeks-pos": "right",
+           "on-scroll": 1,
+             "format": {
+             "months":   "<span color='#ffead3'><b>{}</b></span>",
+             "days":     "<span color='#ecc6d9'><b>{}</b></span>",
+             "weeks":    "<span color='#99ffdd'><b>W{}</b></span>",
+             "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+             "today":    "<span color='#ff6699'><b><u>{}</u></b></span>"
+        }
     },
+
+    "actions": {
+        "on-click-right": "mode",
+        "on-scroll-up": "shift_up",
+        "on-scroll-down": "shift_down"
+    }
+},
 
     "pulseaudio": {
         "format": "{icon} {volume}%",
@@ -170,7 +158,9 @@
         "exec": "python3 /home/directpass/cool_dotfiles/waybar/scripts/ramadan.py",
         "return-type": "json",
         "interval": 60,
-        "tooltip": true
+        "tooltip": true,
+        "format": "{}", 
+        "on-click": "notify-send 'Ramadan Schedule' '$(python3 /home/directpass/cool_dotfiles/waybar/scripts/ramadan.py | jq -r .tooltip)'"
     },
 
     "custom/sleep": {

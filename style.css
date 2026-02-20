@@ -7,17 +7,15 @@
     border-radius: 0;
     font-family: "JetBrainsMono Nerd Font", "Fira Code", FontAwesome;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 10px;
     min-height: 0;
-    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); /* Snappy but smooth */
 }
 
 window#waybar {
-    background-color: rgba(15, 15, 15, 0.4); 
+    background-color: transparent; 
     color: @foreground;
-    margin: 8px 12px 0 12px;
-    border-radius: 16px;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    margin: 8px 12px;
 }
 
 window#waybar.hidden {
@@ -25,143 +23,99 @@ window#waybar.hidden {
 }
 
 tooltip {
-    background: rgba(10, 10, 10, 0.95);
+    background: rgba(15, 15, 15, 0.95);
     border-radius: 12px;
-    border: 1px solid @color2;
+    border: 1px solid @color7;
     padding: 10px;
 }
 
 /* =============================================================================
-   WORKSPACES (Occupied ones only)
+   WORKSPACES (The "Stretching" Style)
    ========================================================================== */
 
 #workspaces {
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(25, 25, 35, 0.85); /* Dark pill container */
     margin: 6px 4px;
-    padding: 0 5px;
-    border-radius: 12px;
-    border: 1px solid @color7; /* High contrast border */
+    padding: 2px 4px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 #workspaces button {
-    padding: 0 8px;
-    margin: 4px 3px;
-    border-radius: 10px;
-    color: @foreground;
-    background-color: transparent;
+    padding: 0px 10px;
+    margin: 3px 2px;
+    border-radius: 15px;
+    color: @color7;
+    background-color: rgba(255, 255, 255, 0.05);
+    min-width: 20px;
 }
-
 
 #workspaces button.active {
     color: @background;
-    background: linear-gradient(135deg, @color7 0%, @color10 100%);
-    min-width: 45px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    background: @color7; /* Light stretching pill */
+    min-width: 60px; /* The "Stretch" effect */
+    border-radius: 15px;
 }
 
 #workspaces button.urgent {
     background-color: @color1;
     color: @background;
-    animation: flash 1s infinite alternate;
+}
+
+#workspaces button.empty {
+    padding: 0;
+    margin: 0;
+    min-width: 0;
+    background: transparent;
+    color: transparent;
 }
 
 /* =============================================================================
-   COLORED PILLS
+   MODULE PILLS (Vibrant & Rounded)
    ========================================================================== */
 
-#custom-user, #clock, #network, #window, 
+#custom-user, #clock, #network, #window, #workspaces,
 #custom-exams, #custom-sleep, #custom-ramadan,
 #cpu, #memory, #custom-media, 
 #pulseaudio, #pulseaudio.microphone, 
 #tray, #custom-gamemode {
-    background-color: rgba(5, 5, 5, 0.85);
-    padding: 0 12px;
-    margin: 8px 4px;
-    border-radius: 12px;
+    background-color: rgba(25, 25, 35, 0.85);
+    padding: 0 15px;
+    margin: 6px 4px;
+    border-radius: 20px;
 }
 
-/* --- LEFT --- */
-#custom-user { border: 1px solid @color2; color: @color2; }
-#clock { border: 1px solid @color3; color: @color3; }
-#network { border: 1px solid @color10; color: @color10; }
-#window { background: transparent; color: @foreground; border: none; }
-
-/* --- CENTER (Joined status pill) --- */
-#custom-exams {
-    border-radius: 12px 0 0 12px;
-    border: 1px solid @color3;
-    border-right: none;
-    color: @color3;
-    margin: 8px 0; /* Vertical margin only */
-}
-#custom-sleep {
-    border-radius: 0;
-    border: 1px solid @color13;
-    border-left: none;
-    border-right: none;
-    margin: 8px 0;
-    color: @color13;
-}
-#workspaces {
-    background: rgba(5, 5, 5, 0.85);
-    border-radius: 0;
-    border: 1px solid @color7;
-    border-left: none;
-    border-right: none;
-    margin: 8px 0;
-    padding: 0 5px;
-}
-#custom-ramadan {
-    border-radius: 0 12px 12px 0;
-    border: 1px solid @color14;
-    border-left: none;
-    color: @color14;
-    margin: 8px 0;
+/* --- THE LIGHT PILL (Window Title) --- */
+#window {
+    background: @color7;
+    color: @background;
+    padding: 0 20px;
+    margin: 6px 10px;
 }
 
-/* --- RIGHT --- */
-#custom-media { border: 1px solid @color5; color: @color5; }
+/* --- THE JOINED PILLS --- */
 
-#cpu {
-    border-radius: 12px 0 0 12px;
-    border: 1px solid @color4;
-    border-right: none;
-    color: @color4;
-    margin-right: 0;
-}
-#memory {
-    border-radius: 0 12px 12px 0;
-    border: 1px solid @color6;
-    border-left: none;
-    color: @color6;
-    margin-left: 0;
-}
+/* Center Status Group */
+#custom-exams { border-radius: 20px 0 0 20px; margin-right: 0; padding-right: 8px; }
+#custom-sleep { border-radius: 0; margin-left: 0; margin-right: 0; padding: 0 8px; }
+#custom-ramadan { border-radius: 0 20px 20px 0; margin-left: 0; padding-left: 8px; }
 
-#pulseaudio {
-    border-radius: 12px 0 0 12px;
-    border: 1px solid @color12;
-    border-right: none;
-    color: @color12;
-    margin-right: 0;
-}
-#pulseaudio.microphone {
-    border-radius: 0 12px 12px 0;
-    border: 1px solid @color14;
-    border-left: none;
-    color: @color14;
-    margin-left: 0;
-}
+/* Hardware Group */
+#cpu { border-radius: 20px 0 0 20px; margin-right: 0; padding-right: 8px; }
+#memory { border-radius: 0 20px 20px 0; margin-left: 0; padding-left: 8px; }
 
-#tray { border: 1px solid @color7; }
-#custom-gamemode { border: 1px solid @color5; color: @color5; }
-#custom-gamemode.enabled { border-color: @color1; color: @color1; text-shadow: 0 0 5px @color1; }
+/* Audio Group */
+#pulseaudio { border-radius: 20px 0 0 20px; margin-right: 0; padding-right: 8px; }
+#pulseaudio.microphone { border-radius: 0 20px 20px 0; margin-left: 0; padding-left: 8px; }
 
-@keyframes flash {
-    0% { opacity: 1; }
-    50% { opacity: 0.5; }
-    100% { opacity: 1; }
-}
+/* --- COLORS --- */
+#clock { color: @color3; }
+#network { color: @color4; }
+#custom-user { color: @color2; }
+#custom-media { color: @color5; }
+#cpu { color: @color4; }
+#memory { color: @color6; }
+#pulseaudio { color: @color12; }
+#pulseaudio.microphone { color: @color14; }
+#custom-gamemode { color: @color1; }
 
-#custom-exams.critical, #custom-sleep.critical {
-    animation: flash 2s infinite;
-}
