@@ -123,3 +123,39 @@ tooltip {
     50% { opacity: 0.7; }
     100% { opacity: 1; }
 }
+
+
+/* --- FLUID MOVING GRADIENT --- */
+
+@keyframes fluid-move {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Applying to all your specific modules from your style.css */
+#custom-user:hover, #clock:hover, #network:hover, #window:hover, 
+#custom-exams:hover, #custom-sleep:hover, #custom-ramadan:hover,
+#cpu:hover, #memory:hover, #custom-media:hover, 
+#pulseaudio:hover, #tray:hover, #custom-gamemode:hover,
+#workspaces button:hover {
+    /* 1. Higher contrast gradient for "noticable" factor */
+    background: linear-gradient(
+        45deg, 
+        @color2, 
+        @color3, 
+        @color7, 
+        @color1, 
+        @color2
+    );
+    
+    /* 2. Increased size for smoother color transitions */
+    background-size: 400% 400%;
+    
+    /* 3. Linear animation for that "liquid" feel */
+    animation: fluid-move 4s linear infinite;
+    
+    /* 4. Text contrast fix */
+    color: #150f07; /* Using your @background color manually for visibility */
+    transition: all 0.4s ease-in-out;
+}
