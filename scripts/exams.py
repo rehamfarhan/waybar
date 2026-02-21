@@ -9,7 +9,7 @@ def get_countdown():
     days = delta.days
 
     text = f"󰺬 {days}d"
-    tooltip = f"{days} days remaining until April 15th exams."
+    tooltip = f"{days} days remaining until April 21th exams."
     
     css_class = ""
     if days < 15:
