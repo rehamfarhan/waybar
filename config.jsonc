@@ -2,7 +2,7 @@
     "layer": "top",
     "position": "bottom",
     "mod": "dock",
-    "exclusive": true,
+    "exclusive": false,
     "passthrough": false,
     "gtk-layer-shell": true,
     "height": 20,
