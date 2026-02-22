@@ -1,12 +1,8 @@
 @import "../../.cache/wal/colors-waybar.css";
-/* =============================================================================
-   THEME IMPORT (Omarchy Aether)
-   ========================================================================== */
 
 /* =============================================================================
    UNIVERSAL STYLING
    ========================================================================== */
-
 * {
     border: none;
     border-radius: 0;
@@ -14,7 +10,10 @@
     font-weight: bold;
     font-size: 12px;
     min-height: 0;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* BOUNCY RETURN TRANSITION */
+    /* This cubic-bezier creates a "back-bounce" effect (the 0.68, -0.55 part) */
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 window#waybar {
@@ -31,7 +30,41 @@ tooltip {
 }
 
 /* =============================================================================
-   WORKSPACES (Aether Style)
+   ANIMATION DEFINITIONS
+   ========================================================================== */
+
+/* 1. The Lava Lamp Ooze: Moves colors in a circular flow */
+@keyframes lava-ooze {
+    0%   { background-position: 0% 50%; }
+    25%  { background-position: 50% 100%; }
+    50%  { background-position: 100% 50%; }
+    75%  { background-position: 50% 0%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* 2. The Splash: Sudden horizontal expansion for transitions */
+@keyframes splash-pop {
+    0% { 
+        background-color: @color1; 
+        padding: 0 40px; 
+    }
+    50% {
+        padding: 0 10px;
+    }
+    100% { 
+        background-color: @color7; 
+        padding: 0 20px; 
+    }
+}
+
+@keyframes pulse_iftar {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+/* =============================================================================
+   WORKSPACES
    ========================================================================== */
 
 #workspaces {
@@ -52,110 +85,90 @@ tooltip {
 
 #workspaces button.active {
     color: @background;
-    background: linear-gradient(45deg, @color7, @color15); 
+    background: @color7;
     min-width: 50px; /* The Aether Stretch */
     border-radius: 15px;
+    /* Splash effect when workspace changes */
+    animation: splash-pop 0.4s ease-out;
+    transition: none; /* Prevents conflict with animation */
 }
 
 /* =============================================================================
-   MODULE PILLS
+   MODULE PILLS (Default States)
    ========================================================================== */
 
 #custom-user, #clock, #network, #window, #custom-exams,
-#custom-exams, #custom-sleep, #custom-ramadan,
+#custom-sleep, #custom-ramadan,
 #cpu, #memory, #custom-media, 
-#pulseaudio, #pulseaudio.microphone, 
-#tray, #custom-gamemode {
+#pulseaudio, #tray, #custom-gamemode {
     background-color: rgba(25, 25, 35, 0.85);
     padding: 0 15px;
     margin: 6px 4px;
     border-radius: 20px;
 }
 
-#custom-sleep {  }
-
-/* --- DYNAMIC RAMADAN COLORS --- */
-#custom-ramadan.sehri {
-    color: @color4; /* Blueish */
-    text-shadow: 0 0 8px @color4;
+/* Special Case: Window Title and Sleep pill */
+#window, #custom-sleep {
+    background: @color7;
+    color: @background;
+    padding: 0 20px;
 }
 
-#custom-ramadan.iftar {
-    color: @color3; /* Orangish */
-    text-shadow: 0 0 12px @color3;
-    animation: pulse_iftar 3s infinite;
+/* Visual splash for window title updates */
+#window {
+    animation: splash-pop 0.5s ease-out;
 }
 
-/* --- CLOCK --- */
+/* Module Specific Colors */
 #clock, #custom-exams { 
     color: @color5; 
     border-bottom: 2px solid @color5;
 }
 
-/* --- HARDWARE --- */
 #cpu { color: @color4; border-radius: 20px 0 0 20px; margin-right: 0; }
 #memory { color: @color6; border-radius: 0 20px 20px 0; margin-left: 0; }
 
-/* 1. The Container */
-#window, #custom-sleep {
-    background: @color7;
-    color: @background;
-    padding: 0 20px;
-    border-radius: 10px; /* Optional: makes it look modern */
+#custom-ramadan.iftar {
+    color: @color3;
+    animation: pulse_iftar 3s infinite;
 }
 
-/* 2. The Text Label (The part that actually changes) */
 
-/* 3. The Animation Definition */
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
 /* =============================================================================
-   ANIMATIONS
+   THE LAVA LAMP HOVER (Universal)
    ========================================================================== */
-@keyframes pulse_iftar {
-    0% { opacity: 1; }
-    50% { opacity: 0.7; }
-    100% { opacity: 1; }
-}
-
-
-/* --- FLUID MOVING GRADIENT --- */
-
-@keyframes fluid-move {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* Applying to all your specific modules from your style.css */
-#custom-user:hover, #clock:hover, #network:hover, #window:hover, 
-#custom-exams:hover, #custom-sleep:hover, #custom-ramadan:hover,
-#cpu:hover, #memory:hover, #custom-media:hover, 
-#pulseaudio:hover, #tray:hover, #custom-gamemode:hover,
-#workspaces button:hover {
-    /* 1. Higher contrast gradient for "noticable" factor */
-    background: linear-gradient(
-        45deg, 
-        @color2, 
-        @color3, 
-        @color7, 
-        @color1, 
-        @color2
+window#waybar #custom-user:hover, 
+window#waybar #clock:hover, 
+window#waybar #network:hover, 
+window#waybar #window:hover, 
+window#waybar #custom-exams:hover, 
+window#waybar #custom-sleep:hover, 
+window#waybar #custom-ramadan:hover,
+window#waybar #cpu:hover, 
+window#waybar #memory:hover, 
+window#waybar #custom-media:hover, 
+window#waybar #pulseaudio:hover, 
+window#waybar #tray:hover, 
+window#waybar #custom-gamemode:hover,
+window#waybar #workspaces button:hover {
+    /* 1. Oozy Radial Gradient */
+    background: radial-gradient(
+        circle, 
+        @color2 0%, 
+        @color3 30%, 
+        @color1 60%, 
+        @color7 100%
     );
-    
-    /* 2. Increased size for smoother color transitions */
     background-size: 400% 400%;
+    animation: lava-ooze 5s ease-in-out infinite;
+
+    /* 2. Liquid Pulse: Grow slightly on hover */
+    padding: 2px 25px; 
+    margin: 4px 2px;
     
-    /* 3. Linear animation for that "liquid" feel */
-    animation: fluid-move 4s linear infinite;
-    
-    /* 4. Text contrast fix */
-    color: #150f07; /* Using your @background color manually for visibility */
-    transition: all 0.4s ease-in-out;
+    color: @background;
+    box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.4);
+
+    /* 3. Snappy Transition (Entering Hover) */
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
