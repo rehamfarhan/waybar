@@ -10,7 +10,6 @@
     font-weight: bold;
     font-size: 12px;
     min-height: 0;
-
     /* ELASTIC BOUNCY ENDING (The Return) */
     transition: all 0.6s cubic-bezier(0.68, -0.6, 0.32, 1.75);
 }
@@ -20,40 +19,25 @@ window#waybar {
     color: @foreground;
 }
 
-/* Tooltip: Glassmorphism */
-tooltip {
-    background: rgba(15, 15, 15, 0.9);
-    border-radius: 12px;
-    border: 1px solid @color7;
-    padding: 10px;
-}
-
 /* =============================================================================
    ANIMATION DEFINITIONS
    ========================================================================== */
 
+/* THE LAVA LAMP OOZE: Animates position to look like rising/falling wax */
 @keyframes lava-ooze {
-    0%   { background-position: 0% 50%; }
-    25%  { background-position: 50% 100%; }
-    50%  { background-position: 100% 50%; }
-    75%  { background-position: 50% 0%; }
-    100% { background-position: 0% 50%; }
+    0% { background-position: 0% 0%; }
+    50% { background-position: 50% 100%; }
+    100% { background-position: 100% 0%; }
 }
 
-@keyframes splash-pop {
-    0% { background-color: @color1; padding: 0 40px; }
-    50% { padding: 0 10px; }
+/* LESS HYPE SPLASH: Focuses on color transition rather than huge padding pops */
+@keyframes splash-calm {
+    0% { background-color: @color2; padding: 0 25px; }
     100% { background-color: @color7; padding: 0 20px; }
 }
 
-@keyframes pulse_iftar {
-    0% { opacity: 1; }
-    50% { opacity: 0.7; }
-    100% { opacity: 1; }
-}
-
 /* =============================================================================
-   WORKSPACES
+   WORKSPACES (Less Hype Edition)
    ========================================================================== */
 
 #workspaces {
@@ -70,62 +54,22 @@ tooltip {
     border-radius: 15px;
     color: @color7;
     background-color: rgba(255, 255, 255, 0.05);
-    /* Explicitly define the return transition for the elastic bounce */
     transition: all 0.6s cubic-bezier(0.68, -0.6, 0.32, 1.75);
 }
 
 #workspaces button.active {
     color: @background;
     background: @color7;
-    min-width: 60px; 
+    min-width: 55px; /* Reduced from 60px */
     border-radius: 15px;
-    animation: splash-pop 0.4s ease-out;
-    margin-left: 5px;
-    margin-right: 5px;
-    transition: none; /* Allows the animation to play without interference */
+    /* Uses the new 'calm' animation */
+    animation: splash-calm 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: none;
 }
 
 /* =============================================================================
-   MODULE PILLS (Default States)
+   THE TRUE LAVA LAMP HOVER (Fluid Motion)
    ========================================================================== */
-
-#custom-user, #clock, #network, #window, #custom-exams,
-#custom-sleep, #custom-ramadan,
-#cpu, #memory, #custom-media, 
-#pulseaudio, #tray, #custom-gamemode {
-    background-color: rgba(25, 25, 35, 0.85);
-    padding: 0 15px;
-    margin: 6px 4px;
-    border-radius: 20px;
-}
-
-#window, #custom-sleep {
-    background: @color7;
-    color: @background;
-    padding: 0 20px;
-}
-
-#window {
-    animation: splash-pop 0.5s ease-out;
-}
-
-#clock, #custom-exams { 
-    color: @color5; 
-    border-bottom: 2px solid @color5;
-}
-
-#cpu { color: @color4; border-radius: 20px 0 0 20px; margin-right: 0; }
-#memory { color: @color6; border-radius: 0 20px 20px 0; margin-left: 0; }
-
-#custom-ramadan.iftar {
-    color: @color3;
-    animation: pulse_iftar 3s infinite;
-}
-
-/* =============================================================================
-   THE LAVA LAMP HOVER (The Stress-Reliever Edition)
-   ========================================================================== */
-
 window#waybar #custom-user:hover, 
 window#waybar #clock:hover, 
 window#waybar #network:hover, 
@@ -140,28 +84,40 @@ window#waybar #pulseaudio:hover,
 window#waybar #tray:hover, 
 window#waybar #custom-gamemode:hover,
 window#waybar #workspaces button:hover {
-    background: repeating-radial-gradient(
-        circle at center, 
-        @color1 0%, 
-        @color2 10%, 
-        @color3 30%, 
-        @color5 50%, 
-        @color7 70%,
-        @color2 90%,
-        @color1 100%
+    /* Multi-layered linear gradient with many stops mimics 'moving wax' better than radial */
+    background: linear-gradient(
+        180deg, 
+        @color1, @color2, @color3, @color5, @color7, @color2, @color1
     );
-    background-size: 600% 600%;
-    animation: lava-ooze 3s infinite linear; 
+    
+    /* Massive vertical size allows the colors to "flow" through the module */
+    background-size: 100% 400%;
+    animation: lava-ooze 4s infinite linear; 
 
-    padding: 2px 30px; 
+    padding: 2px 28px; 
     margin: 4px 2px;
     color: #150f07; 
     
+    /* Glowing liquid effect */
     box-shadow: 
-        inset 0 0 25px rgba(255, 255, 255, 0.7),
-        inset 0 10px 20px @color1,
-        inset 0 -10px 20px @color3;
+        inset 0 0 20px rgba(255, 255, 255, 0.5),
+        inset 0 5px 15px @color1,
+        inset 0 -5px 15px @color3;
 
-    /* SNAPPY ARRIVAL (The Entrance) */
+    /* SNAPPY ARRIVAL */
     transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+
+/* =============================================================================
+   REMAINDER OF MODULES (Unchanged Defaults)
+   ========================================================================== */
+#custom-user, #clock, #network, #window, #custom-exams,
+#custom-sleep, #custom-ramadan, #cpu, #memory, #custom-media, 
+#pulseaudio, #tray, #custom-gamemode {
+    background-color: rgba(25, 25, 35, 0.85);
+    padding: 0 15px;
+    margin: 6px 4px;
+    border-radius: 20px;
+}
+#window, #custom-sleep { background: @color7; color: @background; padding: 0 20px; }
+#window { animation: splash-calm 0.6s ease-out; }
