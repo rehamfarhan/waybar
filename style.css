@@ -11,9 +11,8 @@
     font-size: 12px;
     min-height: 0;
 
-    /* BOUNCY RETURN TRANSITION */
-    /* This cubic-bezier creates a "back-bounce" effect (the 0.68, -0.55 part) */
-    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    /* ELASTIC BOUNCY ENDING (The Return) */
+    transition: all 0.6s cubic-bezier(0.68, -0.6, 0.32, 1.75);
 }
 
 window#waybar {
@@ -33,7 +32,6 @@ tooltip {
    ANIMATION DEFINITIONS
    ========================================================================== */
 
-/* 1. The Lava Lamp Ooze: Moves colors in a circular flow */
 @keyframes lava-ooze {
     0%   { background-position: 0% 50%; }
     25%  { background-position: 50% 100%; }
@@ -42,19 +40,10 @@ tooltip {
     100% { background-position: 0% 50%; }
 }
 
-/* 2. The Splash: Sudden horizontal expansion for transitions */
 @keyframes splash-pop {
-    0% { 
-        background-color: @color1; 
-        padding: 0 40px; 
-    }
-    50% {
-        padding: 0 10px;
-    }
-    100% { 
-        background-color: @color7; 
-        padding: 0 20px; 
-    }
+    0% { background-color: @color1; padding: 0 40px; }
+    50% { padding: 0 10px; }
+    100% { background-color: @color7; padding: 0 20px; }
 }
 
 @keyframes pulse_iftar {
@@ -81,16 +70,19 @@ tooltip {
     border-radius: 15px;
     color: @color7;
     background-color: rgba(255, 255, 255, 0.05);
+    /* Explicitly define the return transition for the elastic bounce */
+    transition: all 0.6s cubic-bezier(0.68, -0.6, 0.32, 1.75);
 }
 
 #workspaces button.active {
     color: @background;
     background: @color7;
-    min-width: 50px; /* The Aether Stretch */
+    min-width: 60px; 
     border-radius: 15px;
-    /* Splash effect when workspace changes */
     animation: splash-pop 0.4s ease-out;
-    transition: none; /* Prevents conflict with animation */
+    margin-left: 5px;
+    margin-right: 5px;
+    transition: none; /* Allows the animation to play without interference */
 }
 
 /* =============================================================================
@@ -107,19 +99,16 @@ tooltip {
     border-radius: 20px;
 }
 
-/* Special Case: Window Title and Sleep pill */
 #window, #custom-sleep {
     background: @color7;
     color: @background;
     padding: 0 20px;
 }
 
-/* Visual splash for window title updates */
 #window {
     animation: splash-pop 0.5s ease-out;
 }
 
-/* Module Specific Colors */
 #clock, #custom-exams { 
     color: @color5; 
     border-bottom: 2px solid @color5;
@@ -133,10 +122,10 @@ tooltip {
     animation: pulse_iftar 3s infinite;
 }
 
-
 /* =============================================================================
-   THE LAVA LAMP HOVER (Universal)
+   THE LAVA LAMP HOVER (The Stress-Reliever Edition)
    ========================================================================== */
+
 window#waybar #custom-user:hover, 
 window#waybar #clock:hover, 
 window#waybar #network:hover, 
@@ -151,24 +140,28 @@ window#waybar #pulseaudio:hover,
 window#waybar #tray:hover, 
 window#waybar #custom-gamemode:hover,
 window#waybar #workspaces button:hover {
-    /* 1. Oozy Radial Gradient */
-    background: radial-gradient(
-        circle, 
-        @color2 0%, 
+    background: repeating-radial-gradient(
+        circle at center, 
+        @color1 0%, 
+        @color2 10%, 
         @color3 30%, 
-        @color1 60%, 
-        @color7 100%
+        @color5 50%, 
+        @color7 70%,
+        @color2 90%,
+        @color1 100%
     );
-    background-size: 400% 400%;
-    animation: lava-ooze 5s ease-in-out infinite;
+    background-size: 600% 600%;
+    animation: lava-ooze 3s infinite linear; 
 
-    /* 2. Liquid Pulse: Grow slightly on hover */
-    padding: 2px 25px; 
+    padding: 2px 30px; 
     margin: 4px 2px;
+    color: #150f07; 
     
-    color: @background;
-    box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.4);
+    box-shadow: 
+        inset 0 0 25px rgba(255, 255, 255, 0.7),
+        inset 0 10px 20px @color1,
+        inset 0 -10px 20px @color3;
 
-    /* 3. Snappy Transition (Entering Hover) */
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* SNAPPY ARRIVAL (The Entrance) */
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
