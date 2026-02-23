@@ -17,6 +17,7 @@
 window#waybar {
     background-color: transparent; 
     color: @foreground;
+
 }
 
 /* =============================================================================
@@ -32,8 +33,14 @@ window#waybar {
 
 /* LESS HYPE SPLASH: Focuses on color transition rather than huge padding pops */
 @keyframes splash-calm {
-    0% { background-color: @color2; padding: 0 25px; }
-    100% { background-color: @color7; padding: 0 20px; }
+    0% { 
+        background-color: @color2; 
+        letter-spacing: 2px; /* Mimics the "stretch" without changing the box size */
+    }
+    100% { 
+        background-color: @color7; 
+        letter-spacing: 0px; 
+    }
 }
 
 /* =============================================================================
