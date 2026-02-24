@@ -168,7 +168,7 @@
     "custom/sleep": {
         "exec": "python3 ~/.config/waybar/scripts/sleep_warning.py",
         "return-type": "json",
-        "interval": 1800,
+        "interval": 60,
         "tooltip": true
     },
 
