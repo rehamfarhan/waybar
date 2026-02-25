@@ -98,6 +98,10 @@ window#waybar #custom-gamemode:hover,
 window#waybar #workspaces button:hover {
     /* Multi-layered linear gradient with many stops mimics 'moving wax' better than radial */
     opacity: 1;
+    /* Returns to your original spacing */
+    margin-top: 6px; 
+    margin-bottom: 6px;
+
     background: linear-gradient(
         180deg, 
         @color1, @color2, @color3, @color5, @color7, @color2, @color1
@@ -131,7 +135,14 @@ window#waybar #workspaces button:hover {
     padding: 0 15px;
     margin: 6px 4px;
     border-radius: 20px;
+
     opacity: 0.01;
+    /* This pulls them up 10px towards the top of the screen */
+    margin-top: -10px; 
+    margin-bottom: 22px; /* Add to the bottom to keep the bar height stable */
+
+    /* GTK handles margin transitions beautifully */
+    transition: all 0.4s cubic-bezier(0.05, 0.9, 0.1, 1.05);
 }
 #window, #custom-sleep {
     background: @color7;
