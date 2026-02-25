@@ -6,6 +6,7 @@
     "passthrough": false,
     "gtk-layer-shell": true,
     "height": 40,
+    "fixed-center": true,
 	
     "include": [
       "~/.config/waybar/modules.jsonc"
@@ -14,12 +15,14 @@
     "modules-left": [
 		"clock",
 		"network", 
-		"custom/ramadan"
+		"custom/ramadan",
+    "custom/sleep"
 	],
     "modules-center": [
-		"group/center"
+      "hyprland/workspaces"
 	],
     "modules-right": [
+    "hyprland/window",
 		"custom/exams",
 		"custom/media",
 		"group/hardware",
@@ -28,15 +31,6 @@
 		"custom/gamemode"
 	],
 
-	// Group Center
-	"group/center": {
-		"orientation": "horizontal",
-		"modules": [
-			"custom/sleep",
-			"hyprland/workspaces",
-		"hyprland/window"
-		]
-	},
 
 	// Group Hardware
 	"group/hardware": {
