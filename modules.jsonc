@@ -2,6 +2,8 @@
     "hyprland/window": {
         "format": "{title}",
         "max-length": 25,
+        "on-click": "hyprctl dispatch workspace empty && omarchy-launch-walker",
+        "on-click-right": "hyprctl dispatch killactive",
         "rewrite": {
             "": "Omarchy",
             "(.*) — Mozilla Firefox": " $1",
