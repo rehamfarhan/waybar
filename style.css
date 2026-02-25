@@ -6,7 +6,7 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: "JetBrainsMono Nerd Font", "Fira Code", FontAwesome;
+    font-family: 'JetBrainsMono Nerd Font';
     font-weight: bold;
     font-size: 12px;
     min-height: 0;
@@ -97,6 +97,7 @@ window#waybar #tray:hover,
 window#waybar #custom-gamemode:hover,
 window#waybar #workspaces button:hover {
     /* Multi-layered linear gradient with many stops mimics 'moving wax' better than radial */
+    opacity: 1;
     background: linear-gradient(
         180deg, 
         @color1, @color2, @color3, @color5, @color7, @color2, @color1
@@ -123,22 +124,24 @@ window#waybar #workspaces button:hover {
 /* =============================================================================
    REMAINDER OF MODULES (Unchanged Defaults)
    ========================================================================== */
-#custom-user, #clock, #network, #custom-exams,
+#custom-user, #clock, #network, #custom-exams, #window,
 #custom-sleep, #custom-ramadan, #cpu, #memory, #custom-media, 
 #pulseaudio, #tray, #custom-gamemode {
     background-color: rgba(25, 25, 35, 0.85);
     padding: 0 15px;
     margin: 6px 4px;
     border-radius: 20px;
+    opacity: 0.01;
 }
 #window, #custom-sleep {
     background: @color7;
     color: @background;
     padding: 0 20px;
-    margin: 6px 4px;
     border-radius: 10px;
     transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-#window { animation: splash-calm 0.6s ease-out; }
+#window {
+    animation: splash-calm 0.6s ease-out;
+}
 
