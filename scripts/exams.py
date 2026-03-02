@@ -3,7 +3,7 @@ import datetime
 import json
 
 def get_countdown():
-    exam_date = datetime.date(2026, 4, 21)
+    exam_date = datetime.date(2026, 4, 20)
     today = datetime.date.today()
     delta = exam_date - today
     days = delta.days
