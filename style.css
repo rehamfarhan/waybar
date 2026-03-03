@@ -156,3 +156,17 @@ window#waybar #workspaces button:hover {
     animation: splash-calm 0.6s ease-out;
 }
 
+
+#custom-voxtype {
+  min-width: 12px;
+  margin: 0 0 0 7.5px;
+}
+
+#custom-voxtype.recording {
+  color: #a55555;
+}
+
+#custom-idle-indicator.active,
+#custom-notification-silencing-indicator.active {
+  color: #a55555;
+}
