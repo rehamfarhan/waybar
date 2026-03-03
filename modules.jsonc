@@ -4,6 +4,7 @@
         "max-length": 25,
         "on-click": "hyprctl dispatch workspace empty && omarchy-launch-walker",
         "on-click-right": "hyprctl dispatch killactive",
+        "on-click-middle": "hyprctl dispatch togglespecialworkspace",
         "rewrite": {
             "": "Omarchy",
             "(.*) — Mozilla Firefox": " $1",
