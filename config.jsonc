@@ -22,8 +22,8 @@
     "modules-right": [
 		"custom/exams",
 		"custom/media",
-		"group/hardware",
 		"group/audio",
+		"group/hardware",
 		"tray",
 		"custom/gamemode"
 	],
